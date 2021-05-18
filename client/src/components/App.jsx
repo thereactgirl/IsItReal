@@ -1,6 +1,7 @@
 import React from 'react';
-import $ from 'jquery';
+import axios from 'axios';
 import Form from './Form.jsx';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -16,33 +17,48 @@ class App extends React.Component {
   }
 
   onChange(event) {
-    this.setState({[event.target.name]: event.target.value})
+    this.setState({ [event.target.name]: event.target.value })
   };
 
-  onSubmit() {
+  onSubmit(event) {
     event.preventDefault();
-    axios.post('', data)
-    .then(res => {
-      console.log('res', res)
-    })
-    .catch(err => {
-      console.log(err);
-    })
+    let data = {
+      fname: this.state.yourName,
+      sname: this.state.theirName
+    }
+
+    const options = {
+      method: 'GET',
+      url: 'https://love-calculator.p.rapidapi.com/getPercentage',
+      params: data,
+      headers: {
+        "x-rapidapi-key": process.env.API_KEY,
+        "x-rapidapi-host": process.env.API_HOST,
+      },
+    };
+
+    axios.post('/percentage', data)
+      .then(res => {
+        console.log('res', res)
+      })
+      .catch(err => {
+        console.log(err);
+      })
   };
 
   render() {
     return (
 
       <div>
-         <header className="App-header">
+        <header className="App-header">
           <h1> Is it real? </h1>
         </header>
         <Form
-         onSubmit={this.onSubmit}
-         onChange={this.onChange}
-         firstName={this.state.firstName}
-         lastName={this.state.lastName}
-         />
+          onSubmit={this.onSubmit}
+          onChange={this.onChange}
+          firstName={this.state.firstName}
+          lastName={this.state.lastName}
+        />
 
 
       </div>

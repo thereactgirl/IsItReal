@@ -4,7 +4,7 @@
   "description": "A love compatability app",
   "main": "index.js",
   "scripts": {
-    "react-dev": "webpack -d --watch",
+    "react-dev": "webpack --watch",
     "start": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +12,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "axios": "^0.18.0",
+    "dotenv": "^9.0.2",
     "jquery": "^3.3.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1"
@@ -23,7 +24,6 @@
     "babel-preset-react": "^6.24.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
-    "mongoose": "^5.1.2",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2"
   }

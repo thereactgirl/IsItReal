@@ -6,11 +6,11 @@ class Form extends React.Component {
   }
   render() {
     return (
-      <form type='onSubmit'>
+      <form onSubmit={this.props.onSubmit}>
         <input placeholder='Your Name' name='yourName' onChange={this.props.onChange} />
-        <input placeholder='Last Name' name='theirName'  onChange={this.props.onChange} />
+        <input placeholder='Their Name' name='theirName'  onChange={this.props.onChange} />
 
-        <button  onSubmit={this.props.onSubmit}>Submit</button>
+        <button type='submit'>Submit</button>
       </form>
     )
   }
