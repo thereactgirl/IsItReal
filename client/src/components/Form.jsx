@@ -6,7 +6,7 @@ class Form extends React.Component {
   }
   render() {
     return (
-      <form onSubmit={this.props.onSubmit}>
+      <form id='form' onSubmit={this.props.onSubmit}>
         <input placeholder='Your Name' name='yourName' onChange={this.props.onChange} />
         <input placeholder='Their Name' name='theirName'  onChange={this.props.onChange} />
 
