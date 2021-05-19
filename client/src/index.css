@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "Kinkie-Zpwm";
+  src: local("Kinkie-Zpwm"),
+    url("./fonts/Kinkie-Zpwm.ttf") format("truetype");
+  font-weight: normal;
+}
+
+h1 {
+  font-family: Kinkie-Zpwm;
+}
