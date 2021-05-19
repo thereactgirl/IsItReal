@@ -1,0 +1,41 @@
+
+.container {
+  padding: 16px;
+}
+.lovebirds {
+  display: flex;
+  justify-content: center;
+}
+p {
+  font-family: Kinkie-Zpwm;
+  color: #fffff0;
+  font-size: 40px;
+  margin: 5px 5px;
+}
+
+
+.results {
+  width: 380px;
+  margin: 0 auto;
+  text-align: center;
+}
+/* Inactive tab */
+.tabs > a {
+  color: red;
+}
+.tabs > a:hover {
+  background-color: pink;
+}
+
+/* Active tab */
+.tabs> a,
+.tabs> a:hover,
+.tabs> a:focus {
+  color: white;
+}
+
+/* Disabled tab */
+.tabs> a {
+  color: white;
+}
+
