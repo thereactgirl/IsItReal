@@ -2,7 +2,7 @@ import React from 'react';
 
 // components
 import ByName from './byname/index.jsx';
-
+import ByZodiac from './byZodiac/index.jsx';
 
 // bootstrap
 import Tabs from 'react-bootstrap/Tabs';
@@ -25,7 +25,7 @@ class App extends React.Component {
           </Tab>
           <Tab eventKey="byZodiac" title="byZodiac">
             <div>
-              zodiac
+              <ByZodiac />
             </div>
           </Tab>
         </Tabs>
