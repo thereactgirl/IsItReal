@@ -1,7 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import Form from './Form.jsx';
-import Results from './Results.jsx';
+// components
+import ByName from './byname/index.jsx';
+import Form from './byname/Form.jsx';
+import Results from './byname/Results.jsx';
+
+
+
+// bootstrap
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Button from 'react-bootstrap/Button';
@@ -59,25 +65,20 @@ class App extends React.Component {
 
   render() {
     return (
-
       <div className='container'>
         <header className="App-header">
           <h1> Is it real? </h1>
         </header>
         <Tabs className='tabs' defaultActiveKey="byName">
-          <Tab  eventKey="byName" title="By Name" >
-
-            <Form
+          <Tab eventKey="byName" title="By Name" >
+            <ByName
               onSubmit={this.onSubmit}
               onChange={this.onChange}
               firstName={this.state.firstName}
               lastName={this.state.lastName}
+              result={this.state.result}
+              percentage={this.state.percentage}
             />
-            <div className="lovebirds">
-              {this.state.yourName && <p> {this.state.yourName} </p>}
-              {this.state.theirName && <p> & {this.state.theirName} </p>}
-            </div>
-            {this.state.result && <Results result={this.state.result} percentage={this.state.percentage} handleClick={this.handleClick} />}
           </Tab>
           <Tab eventKey="byZodiac" title="byZodiac">
             <div>
@@ -85,8 +86,6 @@ class App extends React.Component {
             </div>
           </Tab>
         </Tabs>
-
-
       </div>
     )
   }
