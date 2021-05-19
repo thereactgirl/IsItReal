@@ -38,16 +38,6 @@ class App extends React.Component {
     let data = {
       fname: this.state.yourName,
       sname: this.state.theirName
-    }
-
-    const options = {
-      method: 'GET',
-      url: 'https://love-calculator.p.rapidapi.com/getPercentage',
-      params: data,
-      headers: {
-        "x-rapidapi-key": process.env.API_KEY,
-        "x-rapidapi-host": process.env.API_HOST,
-      },
     };
 
     axios.post('/percentage', data)
@@ -64,7 +54,7 @@ class App extends React.Component {
   render() {
     return (
 
-      <div>
+      <div className='container'>
         <header className="App-header">
           <h1> Is it real? </h1>
         </header>
@@ -74,8 +64,10 @@ class App extends React.Component {
           firstName={this.state.firstName}
           lastName={this.state.lastName}
         />
-        {this.state.yourName && <p>{this.state.yourName} </p>}
-        {this.state.theirName && <p>{this.state.theirName} </p>}
+        <div className="lovebirds">
+          {this.state.yourName && <p> { this.state.yourName } </p> }
+          { this.state.theirName && <p> & { this.state.theirName } </p> }
+        </div>
         {this.state.result && <Results result={this.state.result} percentage={this.state.percentage} handleClick={this.handleClick}/>}
 
       </div>

@@ -8,3 +8,57 @@
 h1 {
   font-family: Kinkie-Zpwm;
 }
+
+header {
+  color: #fffff0;
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  margin: 10px auto;
+  background-color: #f7f7f9;
+  border: 3px solid #f1f1f1;
+  width: 380px;
+  height: 190px;
+}
+
+
+input, select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color:cornflowerblue;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.container {
+  padding: 16px;
+}
+.lovebirds {
+  display: flex;
+  justify-content: center;
+}
+p {
+  font-family: Kinkie-Zpwm;
+  color: #fffff0;
+  font-size: 40px;
+  margin: 5px 5px;
+}
+

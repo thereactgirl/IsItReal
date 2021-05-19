@@ -16,7 +16,6 @@ app.post('/percentage', (req, res) => {
     fname: req.body.fname,
     sname: req.body.sname
   }
-  console.log(data);
   const options = {
     method: 'GET',
     url: 'https://love-calculator.p.rapidapi.com/getPercentage',
