@@ -2,20 +2,72 @@ import React from 'react';
 import Form from './Form.jsx';
 import Results from './Results.jsx';
 
-const ByName = ({ onSubmit, onChange, yourName, theirName, handleClick, result, percentage}) => {
-  return (
-   <div>
-    <Form
-      onSubmit={onSubmit}
-      onChange={onChange}
-    />
-    <div className="lovebirds">
-      {yourName && <p> {yourName} </p>}
-      {theirName && <p> & {theirName} </p>}
-    </div>
-    { result && <Results result={result} percentage={percentage} handleClick={handleClick} /> }
-    </div>
-  )
-}
+import axios from 'axios';
+class ByName extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      yourName: '',
+      theirName: '',
+      percentage: '',
+      result: '',
+    }
+    this.onChange = this.onChange.bind(this);
 
-export default ByName;
+    this.onSubmit = this.onSubmit.bind(this);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  onChange(event) {
+    this.setState({ [event.target.name]: event.target.value })
+  };
+
+  handleClick() {
+    this.setState({
+      yourName: '',
+      theirName: '',
+      percentage: '',
+      result: '',
+    })
+    document.getElementById("form").reset();
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
+    let data = {
+      fname: this.state.yourName,
+      sname: this.state.theirName
+    };
+
+    axios.post('/percentage', data)
+      .then(res => {
+        this.setState({ percentage: res.data.percentage, result: res.data.result });
+      })
+      .catch(err => {
+        console.log(err);
+      })
+
+
+  };
+
+  render() {
+    return (
+      <div>
+        <Form
+              onSubmit={this.onSubmit}
+              onChange={this.onChange}
+              firstName={this.state.firstName}
+              lastName={this.state.lastName}
+            />
+            <div className="lovebirds">
+              {this.state.yourName && <p> {this.state.yourName} </p>}
+              {this.state.theirName && <p> & {this.state.theirName} </p>}
+            </div>
+            {this.state.result && <Results result={this.state.result} percentage={this.state.percentage} handleClick={this.handleClick} />}
+      </div>
+    )
+  }
+};
+
+  export default ByName;
