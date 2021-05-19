@@ -1,2 +1,2 @@
 # IsItReal
-Calculate Love Percentage by Love Calculator with Name
+Calculate Love Percentage by Love Calculator with Names
