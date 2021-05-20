@@ -1,7 +1,7 @@
 import React from 'react';
 import ZForm from './Form.jsx';
 import Results from './Results.jsx';
-
+import Info from './Info.jsx';
 import axios from 'axios';
 
 class ByZodiac extends React.Component {
@@ -16,13 +16,15 @@ class ByZodiac extends React.Component {
         name: '',
         birthdate: ''
       },
-      apiHitsLeft: 83,
-      results: { },
+      year: 2021,
+      results: {  },
       updated: false
     }
     this.onYourFormChange = this.onYourFormChange.bind(this);
 
     this.onTheirFormChange = this.onTheirFormChange.bind(this);
+
+    this.onYearChange = this.onYearChange.bind(this);
 
     this.onSubmit = this.onSubmit.bind(this);
 
@@ -41,6 +43,9 @@ class ByZodiac extends React.Component {
     this.setState({ them: them })
   };
 
+  onYearChange(event) {
+    this.setState({[event.target.name]: event.target.value})
+  }
   handleClick() {
     this.setState({
       you: {
@@ -69,13 +74,14 @@ class ByZodiac extends React.Component {
       yourName: this.state.you.name,
       yourDOB: this.convertDate(this.state.you.birthdate),
       theirName: this.state.them.name,
-      theirDOB: this.convertDate(this.state.them.birthdate)
+      theirDOB: this.convertDate(this.state.them.birthdate),
+      year: this.state.year
+
     };
-    console.log(data)
     axios.post('/zodiac', data)
       .then(res => {
         this.setState({
-          results: res.data
+          results: res.data[0]
         });
       })
       .catch(err => {
@@ -87,12 +93,14 @@ class ByZodiac extends React.Component {
   };
 
   render() {
+
     return (
       <div>
         <ZForm
           onSubmit={this.onSubmit}
           onYourFormChange={this.onYourFormChange}
           onTheirFormChange={this.onTheirFormChange}
+          onYearChange={this.onYearChange}
           you={this.state.you}
           them={this.state.them}
         />
@@ -107,7 +115,9 @@ class ByZodiac extends React.Component {
          handleClick={this.handleClick}
          theirName={this.state.them.name}
          updated={this.state.updated}/>}
+        <Info />
       </div>
+
     )
   }
 };

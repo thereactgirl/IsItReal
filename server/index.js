@@ -36,11 +36,11 @@ app.post('/percentage', (req, res) => {
 })
 
 app.post('/zodiac', (req, res) => {
-  let { yourName, yourDOB, theirName, theirDOB} = req.body
+  let { yourName, yourDOB, theirName, theirDOB, year} = req.body
   console.log(req.body)
   var config = {
     method: 'get',
-    url: `http://www.starlovematch.com/api/match.php?name=${yourName}&dob=${yourDOB}&name1=${theirName}&dob1=${theirDOB}&sort=O&NC=C&ryr=2021&details=N&coupon=87088039`,
+    url: `http://www.starlovematch.com/api/match.php?name=${yourName}&dob=${yourDOB}&name1=${theirName}&dob1=${theirDOB}&sort=O&NC=C&ryr=${year}&details=N&coupon=87088039`,
   };
   axios(config)
   .then(function (response) {

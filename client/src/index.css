@@ -42,3 +42,7 @@ button {
 button:hover {
   opacity: 0.8;
 }
+
+em {
+  font-weight: bold;
+}
