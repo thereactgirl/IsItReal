@@ -10,63 +10,80 @@ class ByZodiac extends React.Component {
     this.state = {
       you: {
         name: '',
-        month: '',
-        day: '',
-        year: ''
+        birthdate: '',
       },
       them: {
         name: '',
-        month: '',
-        day: '',
-        year: ''
-      }
+        birthdate: ''
+      },
+      apiHitsLeft: 83,
+      results: { },
+      updated: false
     }
     this.onYourFormChange = this.onYourFormChange.bind(this);
 
     this.onTheirFormChange = this.onTheirFormChange.bind(this);
+
     this.onSubmit = this.onSubmit.bind(this);
 
     this.handleClick = this.handleClick.bind(this);
   }
 
   onYourFormChange(event) {
-    let you = {...this.state.you}
-    you[event.target.name] =  event.target.value
-    this.setState({you: you})
+    let you = { ...this.state.you }
+    you[event.target.name] = event.target.value
+    this.setState({ you: you })
   };
 
   onTheirFormChange(event) {
-    let them = {...this.state.them}
-    them[event.target.name] =  event.target.value
-    this.setState({them: them})
+    let them = { ...this.state.them }
+    them[event.target.name] = event.target.value
+    this.setState({ them: them })
   };
 
   handleClick() {
     this.setState({
-      yourName: '',
-      theirName: '',
-      percentage: '',
-      result: '',
+      you: {
+        name: '',
+        birthdate: '',
+      },
+      them: {
+        name: '',
+        birthdate: ''
+      },
+      updated: false
     })
     document.getElementById("form").reset();
   }
 
+  convertDate(date) {
+    let [year, month, day] = date.split('-')
+    let converted = `${month}/${day}/${year}`
+    return converted;
+  };
+
   onSubmit(event) {
     event.preventDefault();
+    // change formate form 1994-12-10 to mm/dd/yyyy
     let data = {
-      fname: this.state.yourName,
-      sname: this.state.theirName
+      yourName: this.state.you.name,
+      yourDOB: this.convertDate(this.state.you.birthdate),
+      theirName: this.state.them.name,
+      theirDOB: this.convertDate(this.state.them.birthdate)
     };
-
-    axios.post('/percentage', data)
+    console.log(data)
+    axios.post('/zodiac', data)
       .then(res => {
-        this.setState({ percentage: res.data.percentage, result: res.data.result });
+        this.setState({
+          results: res.data
+        });
       })
       .catch(err => {
         console.log(err);
       })
 
-
+      let hitsLeft = this.state.apiHitsLeft - 1;
+      this.setState({ apiHitsLeft: hitsLeft, updated: true });
   };
 
   render() {
@@ -83,10 +100,16 @@ class ByZodiac extends React.Component {
           {this.state.you.name && <p> {this.state.you.name} </p>}
           {this.state.them.name && <p> & {this.state.them.name} </p>}
         </div>
-        {this.state.result && <Results result={this.state.result} percentage={this.state.percentage} handleClick={this.handleClick} />}
+
+        {this.state.results &&
+        <Results
+         results={this.state.results}
+         handleClick={this.handleClick}
+         theirName={this.state.them.name}
+         updated={this.state.updated}/>}
       </div>
     )
   }
 };
 
-  export default ByZodiac;
+export default ByZodiac;

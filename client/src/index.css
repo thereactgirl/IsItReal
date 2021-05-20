@@ -16,14 +16,10 @@ header {
   justify-content: center;
 }
 
-form {
-  margin: 10px auto;
-  background-color: #f7f7f9;
-  border: 3px solid #f1f1f1;
-  min-width: 380px;
+span {
+  font-family: Kinkie-Zpwm;
+  color: white;
 }
-
-
 input, select {
   width: 100%;
   padding: 12px 20px;
